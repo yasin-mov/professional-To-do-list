@@ -14,13 +14,26 @@ let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 let editTaskId = null;
 
 // ===== Color Picker =====
-colorPickers.forEach(picker => {
+colorPickers.forEach((picker) => {
   picker.addEventListener("click", () => {
     selectedColor = picker.style.backgroundColor;
-    inputField.style.color = selectedColor;  // تغییر رنگ متن ورودی
+    inputField.style.color = selectedColor; // تغییر رنگ متن ورودی
     inputField.style.borderColor = selectedColor;
   });
 });
+
+// ===== Reset Fields =====
+function resetFields() {
+  inputField.value = "";
+  inputField.style.color = "#4bcffa"; // رنگ پیش‌فرض
+  inputField.style.borderColor = "#4bcffa";
+  dateInput.value = "";
+  timeInput.value = "";
+  tagsInput.value = "";
+  selectedColor = "#4bcffa";
+  emptyInput.style.display = "none";
+  editTaskId = null;
+}
 
 // ===== Display Tasks =====
 function displayTasks() {
@@ -36,7 +49,9 @@ function displayTasks() {
       <td>${task.date} ${task.time}</td>
       <td>${task.tags}</td>
       <td>
-        <button class="status-button ${task.status}" data-id="${index}">${task.status}</button>
+        <button class="status-button ${task.status}" data-id="${index}">${
+      task.status
+    }</button>
       </td>
       <td>
         <button class="edit-btn" data-id="${index}">Edit</button>
@@ -47,7 +62,7 @@ function displayTasks() {
     `;
     tableBody.appendChild(row);
 
-    setTimeout(() => row.style.opacity = 1, 50); // fade-in
+    setTimeout(() => (row.style.opacity = 1), 50); // fade-in
   });
 
   addListeners();
@@ -68,32 +83,35 @@ saveBtn.addEventListener("click", () => {
   emptyInput.style.display = "none";
 
   if (editTaskId !== null) {
-    tasks[editTaskId] = { name, date, time, tags, color: selectedColor, status: tasks[editTaskId].status };
-    editTaskId = null;
+    tasks[editTaskId] = {
+      name,
+      date,
+      time,
+      tags,
+      color: selectedColor,
+      status: tasks[editTaskId].status,
+    };
   } else {
-    tasks.push({ name, date, time, tags, color: selectedColor, status: "status-button" });
+    tasks.push({
+      name,
+      date,
+      time,
+      tags,
+      color: selectedColor,
+      status: "status",
+    });
   }
 
-  inputField.value = "";
-  dateInput.value = "";
-  timeInput.value = "";
-  tagsInput.value = "";
+  resetFields(); // ریست کردن فیلدها
   displayTasks();
 });
 
 // ===== Clear Input =====
-clearBtn.addEventListener("click", () => {
-  inputField.value = "";
-  dateInput.value = "";
-  timeInput.value = "";
-  tagsInput.value = "";
-  emptyInput.style.display = "none";
-  editTaskId = null;
-});
+clearBtn.addEventListener("click", resetFields);
 
 // ===== Add Event Listeners to Dynamic Buttons =====
 function addListeners() {
-  document.querySelectorAll(".remove-btn").forEach(btn => {
+  document.querySelectorAll(".remove-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
       const id = btn.dataset.id;
       const row = btn.closest("tr");
@@ -105,7 +123,7 @@ function addListeners() {
     });
   });
 
-  document.querySelectorAll(".edit-btn").forEach(btn => {
+  document.querySelectorAll(".edit-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
       const id = btn.dataset.id;
       const task = tasks[id];
@@ -114,15 +132,18 @@ function addListeners() {
       timeInput.value = task.time;
       tagsInput.value = task.tags;
       selectedColor = task.color;
+      inputField.style.color = selectedColor;
+      inputField.style.borderColor = selectedColor;
       editTaskId = id;
     });
   });
 
-  document.querySelectorAll(".status-button").forEach(btn => {
+  document.querySelectorAll(".status-button").forEach((btn) => {
     btn.addEventListener("click", () => {
       const id = btn.dataset.id;
       if (tasks[id].status === "status-button") tasks[id].status = "inProgress";
-      else if (tasks[id].status === "inProgress") tasks[id].status = "done";
+      else if (tasks[id].status === "inProgress")
+        tasks[id].status = "done";
       else tasks[id].status = "status-button";
       displayTasks();
     });

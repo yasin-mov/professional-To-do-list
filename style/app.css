@@ -5,6 +5,7 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 /* ===== Container ===== */
@@ -15,12 +16,14 @@ body {
   background-color: #1e1e1e;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  transition: all 0.3s ease;
 }
 
 /* ===== Header ===== */
 h1 {
   text-align: center;
   margin-bottom: 20px;
+  font-size: 2rem;
 }
 
 /* ===== Input Area ===== */
@@ -31,6 +34,7 @@ h1 {
   margin-bottom: 20px;
   justify-content: center;
   align-items: center;
+  transition: all 0.3s ease;
 }
 
 .input-area input[type="text"],
@@ -42,6 +46,7 @@ h1 {
   background-color: #2a2a2a;
   color: #e0e0e0;
   transition: all 0.3s ease;
+  min-width: 120px;
 }
 
 .input-area input:focus {
@@ -53,6 +58,8 @@ h1 {
 .color-picker-area {
   display: flex;
   gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .color-picker {
@@ -60,11 +67,12 @@ h1 {
   height: 24px;
   border-radius: 50%;
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .color-picker:hover {
   transform: scale(1.2);
+  box-shadow: 0 0 5px #4bcffa;
 }
 
 /* ===== Buttons ===== */
@@ -85,7 +93,6 @@ button {
 #clear:hover {
   background-color: #ce2939;
   color: #181818;
-
 }
 
 #save {
@@ -96,7 +103,6 @@ button {
 #save:hover {
   background-color: #1f5e20;
   color: #181818;
-
 }
 
 /* ===== Empty Input Warning ===== */
@@ -113,12 +119,14 @@ button {
 table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: auto;
 }
 
 th, td {
   text-align: center;
   padding: 12px;
   border-bottom: 1px solid #333;
+  word-break: break-word;
 }
 
 th {
@@ -126,11 +134,12 @@ th {
 }
 
 .table-row {
-  transition: all 0.3s ease;
+  transition: all 0.3s ease, transform 0.3s ease;
 }
 
 .table-row:hover {
   background-color: #2c2c2c;
+  transform: scale(1.01);
 }
 
 /* ===== Task Buttons ===== */
@@ -146,7 +155,7 @@ th {
   padding: 10px 10px;
   border-radius: 6px;
   border: 1px solid #444;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease, transform 0.2s ease;
 }
 
 .task-btn:hover,
@@ -157,16 +166,18 @@ th {
   transform: scale(1.05);
   border-color: #4bcffa;
 }
-.edit-btn:hover{
-  background-color: #4bcffa;
-  transform: scale(1.05);
 
+.edit-btn:hover {
+  background-color: #4bcffa;
+  color: #121212;
+  transform: scale(1.05);
 }
-.remove-btn:hover{
+
+.remove-btn:hover {
   background-color: #b82433;
   transform: scale(1.05);
-
 }
+
 /* ===== Status Buttons Colors ===== */
 .inProgress {
   background-color: #ffa41b;
@@ -178,26 +189,78 @@ th {
   background-color: #35b73d;
   border-color: #35b73d;
   color: #121212;
-
 }
 
 /* ===== Responsive ===== */
+@media screen and (max-width: 1024px) {
+  .container {
+    margin: 20px;
+    padding: 15px;
+  }
+
+  .input-area input[type="text"],
+  .input-area input[type="date"],
+  .input-area input[type="time"] {
+    min-width: 100px;
+    padding: 8px;
+  }
+
+  th, td {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  button {
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .input-area {
     flex-direction: column;
+    gap: 8px;
   }
 
   th, td {
     padding: 8px;
-    font-size: 14px;
+    font-size: 13px;
   }
 
-  .task-btn,
-  .tags-btn,
-  .status-button,
-  .edit-btn,
-  .remove-btn {
-    padding: 4px 8px;
+  button {
+    padding: 6px 8px;
     font-size: 12px;
+  }
+
+  .color-picker {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  th, td {
+    padding: 2px;
+    font-size: 12px;
+  }
+
+  button {
+    padding: 10px 30px;
+    font-size: 13px;
+  }
+
+  .input-area input[type="text"],
+  .input-area input[type="date"],
+  .input-area input[type="time"] {
+    width: 90%;
+  }
+
+  .color-picker {
+    width: 30px;
+    height: 30px;
   }
 }
