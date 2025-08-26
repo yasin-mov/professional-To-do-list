@@ -121,8 +121,8 @@ function addListeners() {
   document.querySelectorAll(".status-button").forEach(btn => {
     btn.addEventListener("click", () => {
       const id = btn.dataset.id;
-      if (tasks[id].status === "status-button") tasks[id].status = "status-button-inProgress";
-      else if (tasks[id].status === "status-button-inProgress") tasks[id].status = "status-button-done";
+      if (tasks[id].status === "status-button") tasks[id].status = "inProgress";
+      else if (tasks[id].status === "inProgress") tasks[id].status = "done";
       else tasks[id].status = "status-button";
       displayTasks();
     });

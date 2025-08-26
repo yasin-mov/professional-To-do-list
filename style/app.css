@@ -168,13 +168,13 @@ th {
 
 }
 /* ===== Status Buttons Colors ===== */
-.status-button-inProgress {
+.inProgress {
   background-color: #ffa41b;
   border-color: #242424;
   color: #121212;
 }
 
-.status-button-done {
+.done {
   background-color: #35b73d;
   border-color: #35b73d;
   color: #121212;
