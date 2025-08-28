@@ -2,7 +2,7 @@
 body {
   background-color: #121212;
   color: #e0e0e0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
   transition: background-color 0.3s, color 0.3s;
@@ -15,7 +15,7 @@ body {
   padding: 20px;
   background-color: #1e1e1e;
   border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   transition: all 0.3s ease;
 }
 
@@ -122,7 +122,8 @@ table {
   table-layout: auto;
 }
 
-th, td {
+th,
+td {
   text-align: center;
   padding: 12px;
   border-bottom: 1px solid #333;
@@ -191,7 +192,7 @@ th {
   color: #121212;
 }
 
-/* ===== Responsive ===== */
+/* ===== Responsive (Desktop Tweaks) ===== */
 @media screen and (max-width: 1024px) {
   .container {
     margin: 20px;
@@ -205,7 +206,8 @@ th {
     padding: 8px;
   }
 
-  th, td {
+  th,
+  td {
     padding: 10px;
     font-size: 14px;
   }
@@ -222,7 +224,8 @@ th {
     gap: 8px;
   }
 
-  th, td {
+  th,
+  td {
     padding: 8px;
     font-size: 13px;
   }
@@ -243,7 +246,8 @@ th {
     font-size: 1.5rem;
   }
 
-  th, td {
+  th,
+  td {
     padding: 2px;
     font-size: 12px;
   }
@@ -262,5 +266,70 @@ th {
   .color-picker {
     width: 30px;
     height: 30px;
+  }
+}
+/* ===== Responsive Table → Cards (Mobile) ===== */
+
+@media screen and (max-width: 768px) {
+  table,
+  thead,
+  tbody,
+  th,
+  tr,
+  td {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    font-size: 30px;
+  }
+  input {
+    margin-bottom: 1rem;
+    font-size: 25px;
+    text-align: center;
+    width: 90%;
+  }
+  button {
+    font-size: 20px;
+    padding: 0.5rem 2rem;
+  }
+  .color-picker-area {
+    gap: 2rem;
+  }
+  .color-picker {
+    width: 25px;
+    height: 25px;
+  }
+  thead {
+    display: none; /* مخفی کردن هدر جدول در موبایل */
+  }
+
+  tr {
+    margin-bottom: 15px;
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  }
+
+  td {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 5px;
+    border: none;
+    border-bottom: 1px solid #333;
+  }
+
+  td:last-child {
+    border-bottom: none;
+  }
+
+  td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    text-transform: capitalize;
+    color: #aaa;
+    margin-right: 10px;
   }
 }
